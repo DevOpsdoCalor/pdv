@@ -1,0 +1,196 @@
+*PPD-Adobe: "4.3"
+
+*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+*% Project: Bematech Spooler Driver - Thermal Kiosk Printers / Mini-Printers
+*%
+*% Device: Thermal mini-printers and kiosk thermal printers
+*% Bematech models:
+*% . kiosk printers: KC-2580, KF-6580, KC-3800 P, KC-1800, KB-1800, KC-4112
+*% . mini-printers: MP-20CI, MP-20MI, MP-20TH, MP-2000TH, MP-2000CI, MP-2100TH
+*%
+*% Authors: Celso Kopp Webber
+*%          Rafael Ottmann
+*%	    David Wong
+*% . Developed by Webbertek(R) for Bematech S/A
+*%
+*% Description of this file contents:
+*% . Device specific Postscript Printer Definition (PPD)
+*%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+*FormatVersion: "4.3"
+*FileVersion: "1.4"
+*LanguageVersion: English
+*LanguageEncoding: ISOLatin1
+*PCFileName: "MP4200_58mm.ppd"
+*Manufacturer: "Bematech International"
+*Product: "(Linux Drivers by Bematech)"
+*cupsVersion: 1.1
+*% Webbertek: bematech printers are not capable of printing multiple copies by themselves
+*cupsManualCopies: True
+*%Filters for newer cups versions
+*cupsFilter: "application/vnd.cups-pdf 0 bemafilters.sh"
+*%Filters for legacy cups versions
+*cupsFilter: "application/vnd.cups-raster 0 rastertobema"
+
+*% Webbertek: cupsModelNumber allows the driver do decide what to do based on model number
+*% * Numbers 0 through 63 are high resolution printers (usually thermal), which also support low resolution */
+*%   #define BEMA_THERMAL_58_MP4000      0   /* 48mm printable, 384 dot columns (dots per line) */
+*%   #define BEMA_THERMAL_80_MP4000      1   /* 72mm printable, 576 dot columns (dots per line) */
+*%   #define BEMA_THERMAL_58_MP4200      2   /* 48mm printable, 384 dot columns (dots per line) */
+*%   #define BEMA_THERMAL_80_MP4200      3   /* 72mm printable, 576 dot columns (dots per line) */
+
+*% * Numbers 64 and above are low resolution only printers (usually dot matrix) */
+*%   #define BEMA_DOTMATRIX_90       64  /* 80mm printable, 432 dot columns, low-resolution only */
+*cupsModelNumber: 2
+*% Webbertek: ModelName is the name that appers during the "add printer" wizard
+*ModelName: "MP4200 TH 58mm"
+*ShortNickName: "MP2000 TH 58mm "
+*% Webbertek: NickName is what appers after the printer is added in the "printers" list
+*NickName: "MP4200 TH 58mm"
+*PSVersion: "(3010.000) 550"
+*LanguageLevel: "3"
+*ColorDevice: False
+*DefaultColorSpace: Gray
+*FileSystem: False
+*Throughput: "8"
+*LandscapeOrientation: Plus90
+*VariablePaperSize: False
+*TTRasterizer: Type42
+
+*% Webbertek:
+*% * Specifications for "Thermal 58mm":
+*%   . "Thermal 58mm" prints at most physical 384 dot columns (dots per line)
+*%   . "Thermal 58mm" use 48mm as its useful area in the paper
+*%   . "Thermal 58mm" has a 203 dpi resolution
+*%   . 48 mm = 1.8897581 inches
+*%   . 384 physycal dot columns / 1.8897581 inches =~ 203.2 dpi
+*% * PageSize parameter calculations:
+*%   . the PageSize HAS to be specified in terms of printable area points (48mm)
+*%   . the PageSize parameter must be specified in PostScript points, 1 inch = 72 PS points per inch (ppi)
+*%   . 1.8897581 inches (48mm) * 72 PS ppi = 136.0625832 PS points per line
+*%   . will assume a paper length proportional to A4 (842 PS points)
+*%   . the PageSize name will refer to physical size (58mm), Roll58
+*%   . "standard" PageSize choices (Letter and A4) have to set "cupsCompression 1", thus enabling scalling
+*OpenUI *PageSize/Media Size: PickOne
+*OrderDependency: 10 AnySetup *PageSize
+*DefaultPageSize: Roll58mm
+*PageSize Roll58mm/Roll58mm: "<</PageSize[136.06 866.06]/cupsCompression 0/ImagingBBox null>>setpagedevice"
+*% * Letter was changed to 680x880 (it was 612x792) for better scaling
+*PageSize Letter/Letter (scalable): "<</PageSize[680 880]/cupsCompression 1/ImagingBBox null>>setpagedevice"
+*% * A4 was changed to 680x962.29 (it was 595x842) for better scaling
+*PageSize A4/A4 (scalable): "<</PageSize[680 962.29]/cupsCompression 1/ImagingBBox null>>setpagedevice"
+*CloseUI: *PageSize
+
+*% Webbertek:
+*% * PageRegion will use the same calculations as PageSize
+*OpenUI *PageRegion: PickOne
+*OrderDependency: 10 AnySetup *PageRegion
+*DefaultPageRegion: Roll58mm
+*PageRegion Roll58mm/Roll58mm: "<</PageSize[136.06 866.06]/cupsCompression 0/ImagingBBox null>>setpagedevice"
+*% * Letter was changed to 680x880 (it was 612x792) for better scaling
+*PageRegion Letter/Letter (scalable): "<</PageSize[680 880]/cupsCompression 1/ImagingBBox null>>setpagedevice"
+*% * A4 was changed to 680x962.29 (it was 595x842) for better scaling
+*PageRegion A4/A4 (scalable): "<</PageSize[680 962.29]/cupsCompression 1/ImagingBBox null>>setpagedevice"
+*CloseUI: *PageRegion
+
+*% Webbertek:
+*% * ImageableArea will use the same calculations as PageSize
+*DefaultImageableArea: Roll58mm
+*ImageableArea Roll58mm/Roll58mm: "0 0 136.06 866.06"
+*% * Letter was changed to 680x880 (it was 612x792) for better scaling
+*ImageableArea Letter/Letter (scalable): "0 0 680 880"
+*% * A4 was changed to 680x962.29 (it was 595x842) for better scaling
+*ImageableArea A4/A4 (scalable): "0 0 680 962.29"
+
+*% Webbertek:
+*% * PaperDimension will use the same calculations as PageSize
+*DefaultPaperDimension: Roll58mm
+*PaperDimension Roll58mm/Roll58mm: "136.06 866.06"
+*% * Letter was changed to 680x880 (it was 612x792) for better scaling
+*PaperDimension Letter/Letter (scalable): "680 880"
+*% * A4 was changed to 680x962.29 (it was 595x842) for better scaling
+*PaperDimension A4/A4 (scalable): "680 962.29"
+
+*% Webbertek:
+*% * Resolution of 203 DPI was given by manufacturer and matched against our calculations
+*% * the cupsRowCount parameter informs the driver, for each resolution, how many lines of dots
+*%   are sent to the printer each time, according to the printing mode supported by the printer
+*OpenUI *Resolution/Output Resolution: PickOne
+*OrderDependency: 20 AnySetup *Resolution
+*DefaultResolution: 203x203dpi
+*Resolution 203x203dpi/203x203 DPI: "<</HWResolution[203 203]/cupsRowCount 24>>setpagedevice"
+*Resolution 203x90dpi/203x90 DPI: "<</HWResolution[203 90]/cupsRowCount 8>>setpagedevice"
+*CloseUI: *Resolution
+
+*% Webbertek:
+*% * the Cutter parameter informs whether and how the driver should do auto-cutting off the paper
+*% * the numbers for each mode are a PPD standard
+*OpenUI *Cutter/Cutter Configuration: PickOne
+*OrderDependency: 20 AnySetup *Cutter
+*DefaultCutter: Job
+*Cutter Off/Do not auto cut off: "<</CutMedia 0>>setpagedevice"
+*Cutter Job/Cut off after whole job is done: "<</CutMedia 2>>setpagedevice"
+*Cutter Page/Cut off after printing each page: "<</CutMedia 4>>setpagedevice"
+*CloseUI: *Cutter
+
+*OpenUI *Drawer/Drawer Configuration (pin #2): PickOne
+*OrderDependency: 20 AnySetup *Drawer
+*DefaultDrawer: End
+*Drawer Off/Do not open drawer: ""
+*Drawer Begin/Begin of document: ""
+*Drawer End/End of document: ""
+*CloseUI: *Drawer
+
+*OpenUI *Drawer2/Drawer Configuration (pin #5): PickOne
+*OrderDependency: 20 AnySetup *Drawer2
+*DefaultDrawer2: End
+*Drawer2 Off/Do not open drawer: ""
+*Drawer2 Begin/Begin of document: ""
+*Drawer2 End/End of document: ""
+*CloseUI: *Drawer2
+
+*OpenUI *Threshold/Contrast: PickOne
+*OrderDependency: 20 AnySetup *Threshold
+*DefaultThreshold: Off
+*Threshold 25/Black & White - Low: "25"
+*Threshold 50/Black & White - Medium: "50"
+*Threshold 75/Black & White - High: "75"
+*Threshold Off/Grayscale: "0"
+*CloseUI: *Threshold
+
+*DefaultFont: Courier
+*Font AvantGarde-Book: Standard "(001.006S)" Standard ROM
+*Font AvantGarde-BookOblique: Standard "(001.006S)" Standard ROM
+*Font AvantGarde-Demi: Standard "(001.007S)" Standard ROM
+*Font AvantGarde-DemiOblique: Standard "(001.007S)" Standard ROM
+*Font Bookman-Demi: Standard "(001.004S)" Standard ROM
+*Font Bookman-DemiItalic: Standard "(001.004S)" Standard ROM
+*Font Bookman-Light: Standard "(001.004S)" Standard ROM
+*Font Bookman-LightItalic: Standard "(001.004S)" Standard ROM
+*Font Courier: Standard "(002.004S)" Standard ROM
+*Font Courier-Bold: Standard "(002.004S)" Standard ROM
+*Font Courier-BoldOblique: Standard "(002.004S)" Standard ROM
+*Font Courier-Oblique: Standard "(002.004S)" Standard ROM
+*Font Helvetica: Standard "(001.006S)" Standard ROM
+*Font Helvetica-Bold: Standard "(001.007S)" Standard ROM
+*Font Helvetica-BoldOblique: Standard "(001.007S)" Standard ROM
+*Font Helvetica-Narrow: Standard "(001.006S)" Standard ROM
+*Font Helvetica-Narrow-Bold: Standard "(001.007S)" Standard ROM
+*Font Helvetica-Narrow-BoldOblique: Standard "(001.007S)" Standard ROM
+*Font Helvetica-Narrow-Oblique: Standard "(001.006S)" Standard ROM
+*Font Helvetica-Oblique: Standard "(001.006S)" Standard ROM
+*Font NewCenturySchlbk-Bold: Standard "(001.009S)" Standard ROM
+*Font NewCenturySchlbk-BoldItalic: Standard "(001.007S)" Standard ROM
+*Font NewCenturySchlbk-Italic: Standard "(001.006S)" Standard ROM
+*Font NewCenturySchlbk-Roman: Standard "(001.007S)" Standard ROM
+*Font Palatino-Bold: Standard "(001.005S)" Standard ROM
+*Font Palatino-BoldItalic: Standard "(001.005S)" Standard ROM
+*Font Palatino-Italic: Standard "(001.005S)" Standard ROM
+*Font Palatino-Roman: Standard "(001.005S)" Standard ROM
+*Font Symbol: Special "(001.007S)" Special ROM
+*Font Times-Bold: Standard "(001.007S)" Standard ROM
+*Font Times-BoldItalic: Standard "(001.009S)" Standard ROM
+*Font Times-Italic: Standard "(001.007S)" Standard ROM
+*Font Times-Roman: Standard "(001.007S)" Standard ROM
+*Font ZapfChancery-MediumItalic: Standard "(001.007S)" Standard ROM
+*Font ZapfDingbats: Special "(001.004S)" Standard ROM

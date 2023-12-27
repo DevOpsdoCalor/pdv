@@ -1,0 +1,15 @@
+#MP4000TH
+BUS=="usb", ACTION=="add", SYSFS{idVendor}=="0b1b", SYSFS{idProduct}=="0001", MODE="0777", GROUP="lp"
+
+#MP4200TH
+BUS=="usb", ACTION=="add", SYSFS{idVendor}=="0b1b", SYSFS{idProduct}=="0003", MODE="0777", GROUP="lp"
+
+#MP2500TH
+BUS=="usb", ACTION=="add", SYSFS{idVendor}=="0b1b", SYSFS{idProduct}=="0004", MODE="0777", GROUP="lp"
+
+#MP100STH
+BUS=="usb", ACTION=="add", SYSFS{idVendor}=="0b1b", SYSFS{idProduct}=="0005", MODE="0777", GROUP="lp"
+
+#MP5100TH
+BUS=="usb", ACTION=="add", SYSFS{idVendor}=="0b1b", SYSFS{idProduct}=="0006", MODE="0777", GROUP="lp"
+

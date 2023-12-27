@@ -1,0 +1,14 @@
+#MP4000TH
+SUBSYSTEM=="usb", ACTION=="add", ATTRS{idVendor}=="0b1b", ATTRS{idProduct}=="0001", MODE="0777", GROUP="lp"
+
+#MP4200TH
+SUBSYSTEM=="usb", ACTION=="add", ATTRS{idVendor}=="0b1b", ATTRS{idProduct}=="0003", MODE="0777", GROUP="lp"
+
+#MP2500TH
+SUBSYSTEM=="usb", ACTION=="add", ATTRS{idVendor}=="0b1b", ATTRS{idProduct}=="0004", MODE="0777", GROUP="lp"
+
+#MP100STH
+SUBSYSTEM=="usb", ACTION=="add", ATTRS{idVendor}=="0b1b", ATTRS{idProduct}=="0005", MODE="0777", GROUP="lp"
+
+#MP5100TH
+SUBSYSTEM=="usb", ACTION=="add", ATTRS{idVendor}=="0b1b", ATTRS{idProduct}=="0006", MODE="0777", GROUP="lp"

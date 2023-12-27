@@ -1,0 +1,64 @@
+=====================================
+BemaTECH Mini- Printer setup
+=====================================
+
+
+1. go to http://localhost:631, add printer
+	** if you can not login to CUPS, please do the following: 
+	(1) Login as root,
+	(2) Add a user to CUPS, in a console type:
+		lppasswd -a [yourusername]
+		e.g.: lppasswd -a david
+		it will ask for a password,enter your password & press enter.
+		then re-enter password to confirm. 
+		next time you want to login cups admin, enter your username & the password,
+		you should be good to go.
+
+2. add USB printer,
+	Before any setup steps, please make sure USB printer is powered on, and
+	have been plugged into PC.
+
+	(1) Input a printer name, click "Continue" button
+	(2) In Device for [your printer name]  page,
+		select "BemaTECH USB Printer", click "Continue" button
+	(3) In "Model/Driver for [Your printer name] -Make" page,
+		select "BemaTECH International, Inc.", continue.
+	(4) In "Model/Driver- Model" page, 
+		select "76mm or 80mm", continue
+	--Done.
+3. Add TCP/IP printer,
+	(1) Input a printer name, click "Continue" button
+	(2) In Device for [your printer name]  page,
+		select "Internet printing Protocol(ipp)", click "Continue" button
+	(3) Device URI for [your printer name],
+		Input the IP address for your tcp/ip printer.
+		Format: 
+			socket://[ip address]:[ip port number]
+		e.g: socket://192.168.1.160:9100
+	(4) In "Model/Driver for [Your printer name] -Make" page,
+		select "BemaTECH International, Inc.", continue.
+	(5) In "Model/Driver- Model" page, 
+		select "76mm or 80mm", continue
+	--Done.
+4. Add serial port printer,
+	(1) Input a printer name, click "Continue" button
+	(2) In Device for [your printer name]  page,
+		select "Serial Port #[your port number]", click "Continue" button
+	(3) In Serial port Setting for [Your printer name] page,
+		Baudrate = 115200
+		Parity = None
+		Data Bits = 8
+		Flow control = "RTS/CTS(Hardware)" or select the "None"
+	(4) In "Model/Driver for [Your printer name] -Make" page,
+		select "BemaTECH International, Inc.", continue.
+	(5) In "Model/Driver- Model" page, 
+		select "76mm or 80mm", continue
+
+	(6) Use chmod to change serial port attributes,allow all user to open, read and write
+		to this serial port.
+
+		chmod 777 /dev/ttyS[0--9]
+
+		e.g: chmod 777 /dev/ttyS0
+		
+===============END================
